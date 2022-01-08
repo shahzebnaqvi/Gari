@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:gari/screens/home.dart';
+import 'package:gari/screens/sample.dart';
+import 'package:gari/screens/sample2.dart';
 
 void main() {
   runApp(const MyApp());
@@ -12,7 +14,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: Home(),
+      home: Sample2(),
     );
   }
 }
