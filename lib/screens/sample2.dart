@@ -217,15 +217,30 @@ class _Sample2State extends State<Sample2> {
                   ),
                 ],
               )),
-          SingleChildScrollView(
-              scrollDirection: Axis.horizontal,
-              child: Row(children: [
-                veriticalpr(context),
-                veriticalpr(context),
-                veriticalpr(context),
-                veriticalpr(context),
-                veriticalpr(context),
-              ]))
+          // SingleChildScrollView(
+          //     scrollDirection: Axis.horizontal,
+          //     child: Row(children: [
+          //       veriticalpr(context),
+          //       veriticalpr(context),
+          //       veriticalpr(context),
+          //       veriticalpr(context),
+          //       veriticalpr(context),
+          //     ])),
+          Container(
+            height: MediaQuery.of(context).size.height * 0.36,
+            child: Expanded(
+              child: ListView.builder(
+                shrinkWrap: true,
+                scrollDirection: Axis.horizontal,
+                itemCount: 15,
+                itemBuilder: (BuildContext context, int index) => Card(
+                  child: Center(
+                    child: veriticalpr(context),
+                  ),
+                ),
+              ),
+            ),
+          ),
         ]),
       ),
       bottomNavigationBar: Navbar(),
