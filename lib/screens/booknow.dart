@@ -1,7 +1,6 @@
-import 'dart:convert';
-
 import 'package:flutter/material.dart';
 import 'package:gari/screens/mapstyle.dart';
+import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 Color primarycolor = Colors.yellow;
@@ -16,7 +15,18 @@ class Booknow extends StatefulWidget {
 }
 
 class _BooknowState extends State<Booknow> {
+  String longitude = "";
+  String Latitude = "";
   Set<Marker> _markers = {};
+  getcurrentlocation() async {
+    print("object");
+    final geoposition = await GeolocatorPlatform.instance.getCurrentPosition();
+    print(geoposition.latitude);
+
+    setState(() {
+      longitude = "ddssd";
+    });
+  }
 
   void _onMapCreated(GoogleMapController controller) {
     controller.setMapStyle(Mapstyle.mapStyle);
@@ -59,11 +69,17 @@ class _BooknowState extends State<Booknow> {
                             MediaQuery.of(context).size.width * 0.05),
                         child: Column(
                           children: [
-                            Text(
-                              "Car",
-                              style: TextStyle(
-                                  fontSize:
-                                      MediaQuery.of(context).size.width * 0.03),
+                            InkWell(
+                              onTap: () {
+                                getcurrentlocation();
+                              },
+                              child: Text(
+                                "Car",
+                                style: TextStyle(
+                                    fontSize:
+                                        MediaQuery.of(context).size.width *
+                                            0.03),
+                              ),
                             ),
                             Icon(
                               Icons.car_rental,
@@ -78,7 +94,7 @@ class _BooknowState extends State<Booknow> {
                         child: Column(
                           children: [
                             Text(
-                              "Budget",
+                              "${longitude}Budget",
                               style: TextStyle(
                                   fontSize:
                                       MediaQuery.of(context).size.width * 0.03),
