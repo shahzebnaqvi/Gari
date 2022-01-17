@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:gari/screens/home.dart';
-import 'package:gari/screens/sample.dart';
-import 'package:gari/screens/sample2.dart';
 
 void main() {
   runApp(const MyApp());

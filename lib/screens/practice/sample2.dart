@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:gari/screens/sample.dart';
-import 'package:gari/screens/sample1.dart';
+import 'package:gari/screens/practice/sample.dart';
+import 'package:gari/screens/practice/sample1.dart';
 
 class Sample2 extends StatefulWidget {
   const Sample2({Key? key}) : super(key: key);

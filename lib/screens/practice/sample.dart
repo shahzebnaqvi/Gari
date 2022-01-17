@@ -1,6 +1,6 @@
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
-import 'package:gari/screens/sample1.dart';
+import 'package:gari/screens/practice/sample1.dart';
 
 Color primarycolor = Colors.red;
 Color backgroundcolor = Colors.blue;

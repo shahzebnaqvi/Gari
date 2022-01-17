@@ -1,9 +1,12 @@
+import 'dart:async';
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:gari/screens/booknow.dart';
 import 'package:gari/screens/mapstyle.dart';
+import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:google_maps_controller/google_maps_controller.dart';
 
 Color primarycolor = Colors.yellow;
 
@@ -19,6 +22,9 @@ class _HomeState extends State<Home> {
 
   void _onMapCreated(GoogleMapController controller) {
     controller.setMapStyle(Mapstyle.mapStyle);
+    _controllerGoogleMap.complete(controller);
+    newGoogleMapController = controller;
+
     setState(() {
       _markers.add(Marker(
           markerId: MarkerId('id- 1'),
@@ -27,22 +33,48 @@ class _HomeState extends State<Home> {
     });
   }
 
+  Completer<GoogleMapController> _controllerGoogleMap = Completer();
+  late GoogleMapController newGoogleMapController;
+
+  Position? currentPosition;
+  var geolocator = Geolocator();
+  void locatePosition() async {
+    Position position = await Geolocator.getCurrentPosition(
+        desiredAccuracy: LocationAccuracy.high);
+    LatLng latLngpPosition = LatLng(position.latitude, position.longitude);
+
+    CameraPosition cameraPosition =
+        new CameraPosition(target: latLngpPosition, zoom: 14);
+    newGoogleMapController
+        .animateCamera(CameraUpdate.newCameraPosition(cameraPosition));
+  }
+
+  static final CameraPosition _kGooglePlex =
+      CameraPosition(target: LatLng(24.9393199, 67.1220796), zoom: 12);
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Stack(
         children: [
           GoogleMap(
+            mapType: MapType.normal,
             onMapCreated: _onMapCreated,
             markers: _markers,
-            initialCameraPosition: CameraPosition(
-                target: LatLng(24.9393199, 67.1220796), zoom: 15),
+            initialCameraPosition: _kGooglePlex,
             myLocationButtonEnabled: true,
-            zoomControlsEnabled: false,
+            zoomGesturesEnabled: true,
+            zoomControlsEnabled: true,
           ),
           Container(
             child: Column(
               children: [
+                FloatingActionButton.extended(
+                  onPressed: () {
+                    locatePosition();
+                  },
+                  label: Text('My Location'),
+                  icon: Icon(Icons.location_on),
+                ),
                 SizedBox(
                   height: MediaQuery.of(context).size.width * 0.07,
                 ),
