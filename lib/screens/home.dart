@@ -68,13 +68,6 @@ class _HomeState extends State<Home> {
           Container(
             child: Column(
               children: [
-                FloatingActionButton.extended(
-                  onPressed: () {
-                    locatePosition();
-                  },
-                  label: Text('My Location'),
-                  icon: Icon(Icons.location_on),
-                ),
                 SizedBox(
                   height: MediaQuery.of(context).size.width * 0.07,
                 ),
@@ -258,8 +251,19 @@ class _HomeState extends State<Home> {
                                 builder: (context) => const Booknow()),
                           );
                         },
-                        child: Text("I am Here!")))
+                        child: Text("I am Here!"))),
               ],
+            ),
+          ),
+          Positioned(
+            bottom: 20,
+            left: 20,
+            child: FloatingActionButton(
+              backgroundColor: Colors.yellow,
+              onPressed: () {
+                locatePosition();
+              },
+              child: new Icon(Icons.pin_drop),
             ),
           )
         ],
