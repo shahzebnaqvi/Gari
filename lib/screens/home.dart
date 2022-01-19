@@ -18,7 +18,13 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
+  late GoogleMapController _googleMapController;
+
   Set<Marker> _markers = {};
+  void dispose() {
+    _googleMapController.dispose();
+    super.dispose();
+  }
 
   void _onMapCreated(GoogleMapController controller) {
     controller.setMapStyle(Mapstyle.mapStyle);
@@ -27,9 +33,10 @@ class _HomeState extends State<Home> {
 
     setState(() {
       _markers.add(Marker(
-          markerId: MarkerId('id- 1'),
+          markerId: MarkerId('origin'),
           position: LatLng(24.9393199, 67.1220796),
-          infoWindow: InfoWindow(title: "Where to", snippet: "aaa")));
+          infoWindow:
+              InfoWindow(title: "From Where", snippet: "current Location")));
     });
   }
 
@@ -47,6 +54,13 @@ class _HomeState extends State<Home> {
         new CameraPosition(target: latLngpPosition, zoom: 14);
     newGoogleMapController
         .animateCamera(CameraUpdate.newCameraPosition(cameraPosition));
+
+    setState(() {
+      _markers.add(Marker(
+          markerId: MarkerId('origin'),
+          position: latLngpPosition,
+          infoWindow: InfoWindow(title: "Where to", snippet: "aaa")));
+    });
   }
 
   static final CameraPosition _kGooglePlex =
@@ -65,26 +79,68 @@ class _HomeState extends State<Home> {
             zoomGesturesEnabled: true,
             zoomControlsEnabled: true,
           ),
-          Container(
-            child: Column(
-              children: [
-                SizedBox(
-                  height: MediaQuery.of(context).size.width * 0.07,
+          Positioned(
+              child: ListTile(
+            leading: Icon(Icons.ac_unit_outlined),
+            title: Text("Book Your Ride"),
+          )),
+          Positioned(
+            right: 0,
+            left: 0,
+            top: MediaQuery.of(context).size.height * 0.1,
+            child: Align(
+              alignment: Alignment.bottomCenter,
+              child: Container(
+                width: MediaQuery.of(context).size.width * 0.78,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(10),
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.grey.withOpacity(0.5),
+                      spreadRadius: 5,
+                      blurRadius: 7,
+                      offset: Offset(0, 3), // changes position of shadow
+                    ),
+                  ],
                 ),
-                Padding(
-                  padding:
-                      EdgeInsets.all(MediaQuery.of(context).size.width * 0.05),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.end,
-                    children: [Icon(Icons.menu)],
+                child: TextField(
+                  style: TextStyle(color: Colors.red),
+                  decoration: InputDecoration(
+                    contentPadding: EdgeInsets.all(10.0),
+                    fillColor: Colors.white,
+                    filled: true,
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.all(
+                        Radius.circular(4.0),
+                      ),
+                      borderSide: BorderSide.none,
+                    ),
+                    prefixIcon: IconButton(
+                      icon: Icon(
+                        Icons.circle,
+                        size: 16,
+                      ),
+                      onPressed: () {},
+                    ),
+                    suffixIcon: IconButton(
+                      icon: Icon(Icons.favorite_border),
+                      onPressed: () {},
+                    ),
+                    suffixStyle: const TextStyle(color: Colors.green),
                   ),
                 ),
-                SizedBox(
-                  height: MediaQuery.of(context).size.width * 0.03,
-                ),
+              ),
+            ),
+          ),
+          Positioned(
+            top: MediaQuery.of(context).size.width * 0.4,
+            right: 0,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: [
                 Container(
-                  width: MediaQuery.of(context).size.width * 0.78,
                   decoration: BoxDecoration(
+                    color: Colors.white,
                     borderRadius: BorderRadius.circular(10),
                     boxShadow: [
                       BoxShadow(
@@ -95,164 +151,125 @@ class _HomeState extends State<Home> {
                       ),
                     ],
                   ),
-                  child: TextField(
-                    style: TextStyle(color: Colors.red),
-                    decoration: InputDecoration(
-                      contentPadding: EdgeInsets.all(10.0),
-                      fillColor: Colors.white,
-                      filled: true,
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.all(
-                          Radius.circular(4.0),
+                  padding:
+                      EdgeInsets.all(MediaQuery.of(context).size.width * 0.06),
+                  child: Column(
+                    children: [
+                      Text(
+                        "Car",
+                        style: TextStyle(
+                            fontSize: MediaQuery.of(context).size.width * 0.03),
+                      ),
+                      Padding(
+                        padding: EdgeInsets.only(
+                            bottom: MediaQuery.of(context).size.width * 0.03),
+                        child: Icon(
+                          Icons.car_rental,
+                          size: MediaQuery.of(context).size.width * 0.09,
                         ),
-                        borderSide: BorderSide.none,
                       ),
-                      prefixIcon: IconButton(
-                        icon: Icon(
-                          Icons.circle,
-                          size: 16,
+                      Text(
+                        "Budget",
+                        style: TextStyle(
+                            fontSize: MediaQuery.of(context).size.width * 0.03),
+                      ),
+                      Padding(
+                        padding: EdgeInsets.only(
+                            bottom: MediaQuery.of(context).size.width * 0.03),
+                        child: Icon(
+                          Icons.car_rental,
+                          size: MediaQuery.of(context).size.width * 0.09,
                         ),
-                        onPressed: () {},
                       ),
-                      suffixIcon: IconButton(
-                        icon: Icon(Icons.favorite_border),
-                        onPressed: () {},
+                      Text(
+                        "Tuk",
+                        style: TextStyle(
+                            fontSize: MediaQuery.of(context).size.width * 0.03),
                       ),
-                      suffixStyle: const TextStyle(color: Colors.green),
-                    ),
+                      Padding(
+                        padding: EdgeInsets.only(
+                            bottom: MediaQuery.of(context).size.width * 0.03),
+                        child: Icon(
+                          Icons.car_rental,
+                          size: MediaQuery.of(context).size.width * 0.09,
+                        ),
+                      ),
+                      Text(
+                        "City",
+                        style: TextStyle(
+                            fontSize: MediaQuery.of(context).size.width * 0.03),
+                      ),
+                      Padding(
+                        padding: EdgeInsets.only(
+                            bottom: MediaQuery.of(context).size.width * 0.03),
+                        child: Icon(
+                          Icons.car_rental,
+                          size: MediaQuery.of(context).size.width * 0.09,
+                        ),
+                      ),
+                      Text(
+                        "Van",
+                        style: TextStyle(
+                            fontSize: MediaQuery.of(context).size.width * 0.03),
+                      ),
+                      Padding(
+                        padding: EdgeInsets.only(
+                            bottom: MediaQuery.of(context).size.width * 0.03),
+                        child: Icon(
+                          Icons.car_rental,
+                          size: MediaQuery.of(context).size.width * 0.09,
+                        ),
+                      ),
+                    ],
                   ),
                 ),
-                SizedBox(
-                  height: MediaQuery.of(context).size.width * 0.2,
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  children: [
-                    Container(
-                      decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.circular(10),
-                        boxShadow: [
-                          BoxShadow(
-                            color: Colors.grey.withOpacity(0.5),
-                            spreadRadius: 5,
-                            blurRadius: 7,
-                            offset: Offset(0, 3), // changes position of shadow
-                          ),
-                        ],
-                      ),
-                      padding: EdgeInsets.all(
-                          MediaQuery.of(context).size.width * 0.06),
-                      child: Column(
-                        children: [
-                          Text(
-                            "Car",
-                            style: TextStyle(
-                                fontSize:
-                                    MediaQuery.of(context).size.width * 0.03),
-                          ),
-                          Padding(
-                            padding: EdgeInsets.only(
-                                bottom:
-                                    MediaQuery.of(context).size.width * 0.03),
-                            child: Icon(
-                              Icons.car_rental,
-                              size: MediaQuery.of(context).size.width * 0.09,
-                            ),
-                          ),
-                          Text(
-                            "Budget",
-                            style: TextStyle(
-                                fontSize:
-                                    MediaQuery.of(context).size.width * 0.03),
-                          ),
-                          Padding(
-                            padding: EdgeInsets.only(
-                                bottom:
-                                    MediaQuery.of(context).size.width * 0.03),
-                            child: Icon(
-                              Icons.car_rental,
-                              size: MediaQuery.of(context).size.width * 0.09,
-                            ),
-                          ),
-                          Text(
-                            "Tuk",
-                            style: TextStyle(
-                                fontSize:
-                                    MediaQuery.of(context).size.width * 0.03),
-                          ),
-                          Padding(
-                            padding: EdgeInsets.only(
-                                bottom:
-                                    MediaQuery.of(context).size.width * 0.03),
-                            child: Icon(
-                              Icons.car_rental,
-                              size: MediaQuery.of(context).size.width * 0.09,
-                            ),
-                          ),
-                          Text(
-                            "City",
-                            style: TextStyle(
-                                fontSize:
-                                    MediaQuery.of(context).size.width * 0.03),
-                          ),
-                          Padding(
-                            padding: EdgeInsets.only(
-                                bottom:
-                                    MediaQuery.of(context).size.width * 0.03),
-                            child: Icon(
-                              Icons.car_rental,
-                              size: MediaQuery.of(context).size.width * 0.09,
-                            ),
-                          ),
-                          Text(
-                            "Van",
-                            style: TextStyle(
-                                fontSize:
-                                    MediaQuery.of(context).size.width * 0.03),
-                          ),
-                          Padding(
-                            padding: EdgeInsets.only(
-                                bottom:
-                                    MediaQuery.of(context).size.width * 0.03),
-                            child: Icon(
-                              Icons.car_rental,
-                              size: MediaQuery.of(context).size.width * 0.09,
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ],
-                ),
-                SizedBox(
-                  height: MediaQuery.of(context).size.width * 0.3,
-                ),
-                Container(
-                    width: MediaQuery.of(context).size.width * 0.5,
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(490),
-                        boxShadow: [
-                          BoxShadow(
-                            color: Colors.grey.withOpacity(0.5),
-                            spreadRadius: 5,
-                            blurRadius: 7,
-                            offset: Offset(0, 3), // changes position of shadow
-                          ),
-                        ]),
-                    child: ElevatedButton(
-                        style: ElevatedButton.styleFrom(
-                          primary: primarycolor,
-                        ),
-                        onPressed: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => const Booknow()),
-                          );
-                        },
-                        child: Text("I am Here!"))),
               ],
+            ),
+          ),
+          Container(
+            child: Column(
+              children: [
+                Padding(
+                  padding:
+                      EdgeInsets.all(MediaQuery.of(context).size.width * 0.05),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: [Icon(Icons.menu)],
+                  ),
+                ),
+              ],
+            ),
+          ),
+          Positioned(
+            left: 0,
+            right: 0,
+            bottom: MediaQuery.of(context).size.height * 0.02,
+            child: Align(
+              alignment: Alignment.topCenter,
+              child: Container(
+                  width: MediaQuery.of(context).size.width * 0.5,
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(490),
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.grey.withOpacity(0.5),
+                          spreadRadius: 5,
+                          blurRadius: 7,
+                          offset: Offset(0, 3), // changes position of shadow
+                        ),
+                      ]),
+                  child: ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                        primary: primarycolor,
+                      ),
+                      onPressed: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => const Booknow()),
+                        );
+                      },
+                      child: Text("I am Here!"))),
             ),
           ),
           Positioned(
