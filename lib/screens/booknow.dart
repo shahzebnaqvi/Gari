@@ -3,9 +3,11 @@ import 'package:gari/screens/mapstyle.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
-Color primarycolor = Colors.yellow;
-Color secondarycolor = Colors.grey;
+Color primarycolor = Colors.black;
+Color secondarycolor = Colors.black12;
 Color secondarycolor2 = Colors.blueGrey;
+Color secondarycolor3 = Colors.yellow;
+Color secondarycolor4 = Colors.grey;
 
 class Booknow extends StatefulWidget {
   const Booknow({Key? key}) : super(key: key);
