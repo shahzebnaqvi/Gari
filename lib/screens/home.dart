@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_polyline_points/flutter_polyline_points.dart';
 import 'package:gari/screens/selectcar.dart';
 import 'package:gari/screens/style.dart';
 import 'package:gari/screens/mapstyle.dart';
@@ -18,7 +19,12 @@ class Home extends StatefulWidget {
 class _HomeState extends State<Home> {
   late GoogleMapController _googleMapController;
 
-  Set<Marker> _markers = {};
+  String googleAPiKey = "AIzaSyCg1UJ5-pBUCmjMZAOOnSXFYrxTrN3HYi8";
+  Set<Marker> marker = {};
+  Map<PolylineId, Polyline> polylines = {};
+  List<LatLng> polylineCoordinates = [];
+  PolylinePoints polylinePoints = PolylinePoints();
+
   void dispose() {
     _googleMapController.dispose();
     super.dispose();
@@ -30,7 +36,7 @@ class _HomeState extends State<Home> {
     newGoogleMapController = controller;
 
     setState(() {
-      _markers.add(Marker(
+      marker.add(Marker(
           markerId: MarkerId('origin'),
           position: LatLng(24.9393199, 67.1220796),
           infoWindow:
@@ -54,12 +60,22 @@ class _HomeState extends State<Home> {
         .animateCamera(CameraUpdate.newCameraPosition(cameraPosition));
 
     setState(() {
-      _markers.add(Marker(
+      marker.add(Marker(
           markerId: MarkerId('origin'),
           position: latLngpPosition,
           infoWindow: InfoWindow(title: "Where to", snippet: "aaa")));
     });
   }
+
+  void locatePositionfinal() async {
+    setState(() {
+     Marker(
+          markerId: const MarkerId('destination'),
+          infoWindow: const InfoWindow(title: 'Destination'),
+          icon: BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueBlue),
+          position: LatLng(24.9393199, 67.1220796),
+        );
+  })}
 
   static final CameraPosition _kGooglePlex =
       CameraPosition(target: LatLng(24.9393199, 67.1220796), zoom: 12);
@@ -71,7 +87,7 @@ class _HomeState extends State<Home> {
           GoogleMap(
             mapType: MapType.normal,
             onMapCreated: _onMapCreated,
-            markers: _markers,
+            markers: marker,
             initialCameraPosition: _kGooglePlex,
             myLocationButtonEnabled: true,
             zoomGesturesEnabled: true,
@@ -156,7 +172,9 @@ class _HomeState extends State<Home> {
                         suffixIcon: IconButton(
                           icon: Icon(Icons.favorite_border,
                               color: secondarycolor3),
-                          onPressed: () {},
+                          onPressed: () {
+                            locatePositionfinal();
+                          },
                         ),
                         suffixStyle: TextStyle(color: secondarycolor3),
                       ),

@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_polyline_points/flutter_polyline_points.dart';
 import 'package:google_maps_controller/google_maps_controller.dart';
 
 String googleAPiKey = "AIzaSyCg1UJ5-pBUCmjMZAOOnSXFYrxTrN3HYi8";
-Map<PolylineId, Polyline> polylines = {};
-List<LatLng> polylineCoordinates = [];
-Map<MarkerId, Marker> markers = {};
 
 List carname = ["Go Share", "Go Share", "Go Share"];
 List carrestimatedprice = [
