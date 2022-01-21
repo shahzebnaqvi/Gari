@@ -91,70 +91,127 @@ class _SelectdriverState extends State<Selectdriver> {
           Positioned(
               bottom: 0,
               child: Container(
+                padding:
+                    EdgeInsets.all(MediaQuery.of(context).size.width * 0.02),
                 color: secondarycolor1,
                 width: MediaQuery.of(context).size.width,
                 child: Column(
                   children: [
-                    ListTile(
-                      leading: Image(
-                        image: AssetImage(
-                          "assets/images/default.jpeg",
-                        ),
-                      ),
-                      title: Text("George Smith",
-                          style:
-                              TextStyle(color: secondarycolor5, fontSize: 16)),
-                      subtitle: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            "Hyundai WaganR",
-                            style:
-                                TextStyle(color: secondarycolor5, fontSize: 9),
-                          ),
-                          Text(
-                            "data",
-                            style:
-                                TextStyle(color: secondarycolor5, fontSize: 11),
-                          )
-                        ],
-                      ),
-                      trailing: Column(
-                        children: [
-                          ElevatedButton.icon(
-                            icon: const Text(
-                              'UPADATE',
-                              style: TextStyle(fontSize: 9),
+                    Row(
+                      children: [
+                        Container(
+                          padding: EdgeInsets.only(
+                              right: MediaQuery.of(context).size.width * 0.02),
+                          child: Image(
+                            image: AssetImage(
+                              "assets/images/default.jpeg",
                             ),
-                            label: Icon(
-                              Icons.translate,
-                              size: 7,
+                            width: MediaQuery.of(context).size.width * 0.2,
+                          ),
+                        ),
+                        Expanded(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text("George Smith",
+                                  style: TextStyle(
+                                      color: secondarycolor5, fontSize: 16)),
+                              Text(
+                                "Hyundai WaganR",
+                                style: TextStyle(
+                                    color: secondarycolor4, fontSize: 12),
+                              ),
+                              Text("DL 579 3 ",
+                                  style: TextStyle(
+                                      color: secondarycolor5, fontSize: 12)),
+                            ],
+                          ),
+                        ),
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.end,
+                          children: [
+                            Container(
+                              padding: EdgeInsets.all(
+                                  MediaQuery.of(context).size.width * 0.015),
+                              decoration: new BoxDecoration(
+                                  color: Colors.green,
+                                  borderRadius: new BorderRadius.all(
+                                    Radius.circular(
+                                        MediaQuery.of(context).size.width *
+                                            0.02),
+                                  )),
+                              child: RichText(
+                                text: TextSpan(
+                                  children: [
+                                    TextSpan(
+                                      text: "4.5 ",
+                                    ),
+                                    WidgetSpan(
+                                      child: Icon(
+                                        Icons.star,
+                                        size: 14,
+                                        color: secondarycolor3,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ),
+                            Text(
+                              "Arriving in",
+                              style: TextStyle(
+                                  color: secondarycolor4, fontSize: 12),
+                            ),
+                            Text("04 Mins",
+                                style: TextStyle(
+                                    color: secondarycolor5, fontSize: 12)),
+                          ],
+                        ),
+                      ],
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        ElevatedButton.icon(
+                            style: ElevatedButton.styleFrom(
+                              primary: primarycolor,
+                              shape: RoundedRectangleBorder(
+                                  borderRadius:
+                                      BorderRadius.all(Radius.circular(25))),
                             ),
                             onPressed: () {},
-                          ),
-                          Text("d")
-                        ],
-                      ),
-                    ),
-                    Container(
-                      padding: EdgeInsets.all(20),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          ElevatedButton.icon(
-                              onPressed: () {},
-                              icon: Icon(Icons.call),
-                              label: Text("dd")),
-                          ElevatedButton.icon(
-                              onPressed: () {},
-                              icon: Icon(Icons.call),
-                              label: Text("dd")),
-                          ElevatedButton.icon(
-                              onPressed: () {},
-                              icon: Icon(Icons.call),
-                              label: Text("dd"))
-                        ],
-                      ),
+                            icon: Icon(
+                              Icons.call,
+                              color: secondarycolor3,
+                            ),
+                            label: Text("Call Now")),
+                        ElevatedButton.icon(
+                            style: ElevatedButton.styleFrom(
+                              primary: primarycolor,
+                              shape: RoundedRectangleBorder(
+                                  borderRadius:
+                                      BorderRadius.all(Radius.circular(25))),
+                            ),
+                            onPressed: () {},
+                            icon: Icon(
+                              Icons.close,
+                              color: secondarycolor3,
+                            ),
+                            label: Text("Cancel")),
+                        ElevatedButton.icon(
+                            style: ElevatedButton.styleFrom(
+                              primary: primarycolor,
+                              shape: RoundedRectangleBorder(
+                                  borderRadius:
+                                      BorderRadius.all(Radius.circular(25))),
+                            ),
+                            onPressed: () {},
+                            icon: Icon(
+                              Icons.arrow_drop_up,
+                              color: secondarycolor3,
+                            ),
+                            label: Text("More"))
+                      ],
                     )
                   ],
                 ),

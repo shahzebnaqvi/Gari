@@ -98,33 +98,27 @@ class _HomeState extends State<Home> {
                 width: MediaQuery.of(context).size.width * 0.78,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(10),
-                  boxShadow: [
-                    BoxShadow(
-                      color: Colors.grey.withOpacity(0.5),
-                      spreadRadius: 5,
-                      blurRadius: 7,
-                      offset: Offset(0, 3), // changes position of shadow
-                    ),
-                  ],
                 ),
                 child: Column(
                   children: [
                     TextField(
-                      style: TextStyle(color: Colors.red),
+                      style: TextStyle(color: secondarycolor3),
                       decoration: InputDecoration(
                         contentPadding: EdgeInsets.all(10.0),
-                        fillColor: secondarycolor4,
+                        fillColor: secondarycolor1,
                         filled: true,
                         border: InputBorder.none,
                         prefixIcon: IconButton(
                           icon: Icon(
                             Icons.circle,
+                            color: secondarycolor3,
                             size: 16,
                           ),
                           onPressed: () {},
                         ),
                         suffixIcon: IconButton(
                           icon: Icon(Icons.location_on),
+                          color: secondarycolor3,
                           onPressed: () {
                             locatePosition();
                           },
@@ -135,30 +129,36 @@ class _HomeState extends State<Home> {
                     Container(
                         alignment: Alignment.centerLeft,
                         width: MediaQuery.of(context).size.width,
-                        color: secondarycolor4,
+                        color: secondarycolor1,
                         child: Padding(
                           padding: const EdgeInsets.only(left: 12.0),
-                          child: Icon(Icons.more_vert),
+                          child: Icon(
+                            Icons.more_vert,
+                            color: secondarycolor3,
+                          ),
                         )),
                     TextField(
-                      style: TextStyle(color: Colors.red),
+                      style: TextStyle(color: secondarycolor3),
                       decoration: InputDecoration(
                         contentPadding: EdgeInsets.all(10.0),
-                        fillColor: secondarycolor4,
+                        fillColor: secondarycolor1,
                         filled: true,
                         border: InputBorder.none,
                         prefixIcon: IconButton(
                           icon: Icon(
                             Icons.circle,
+                            color: secondarycolor3,
                             size: 16,
                           ),
+                          color: secondarycolor3,
                           onPressed: () {},
                         ),
                         suffixIcon: IconButton(
-                          icon: Icon(Icons.favorite_border),
+                          icon: Icon(Icons.favorite_border,
+                              color: secondarycolor3),
                           onPressed: () {},
                         ),
-                        suffixStyle: const TextStyle(color: Colors.green),
+                        suffixStyle: TextStyle(color: secondarycolor3),
                       ),
                     ),
                   ],
@@ -185,8 +185,31 @@ class _HomeState extends State<Home> {
                           onPressed: () {},
                           child: Wrap(children: [
                             Text("Payment mode "),
-                            Text("Wallet",
-                                style: TextStyle(color: secondarycolor3))
+                            PopupMenuButton(
+                                child: Text(
+                                  "Wallet",
+                                  style: TextStyle(color: secondarycolor3),
+                                ),
+                                itemBuilder: (context) => [
+                                      PopupMenuItem(
+                                        child: ListTile(
+                                          contentPadding: EdgeInsets.all(0),
+                                          leading: Icon(Icons.money),
+                                          title: Text("Cash"),
+                                        ),
+                                        value: 1,
+                                      ),
+                                      PopupMenuItem(
+                                        child: ListTile(
+                                          contentPadding: EdgeInsets.all(0),
+                                          leading: Icon(
+                                            Icons.wallet_membership,
+                                          ), // your icon
+                                          title: Text("Wallet"),
+                                        ),
+                                        value: 2,
+                                      )
+                                    ]),
                           ])),
                     ),
                     Expanded(
@@ -199,10 +222,29 @@ class _HomeState extends State<Home> {
                           onPressed: () {},
                           child: Wrap(children: [
                             Text("Passenger "),
-                            Text(
-                              "1 Person",
-                              style: TextStyle(color: secondarycolor3),
-                            )
+                            PopupMenuButton(
+                                child: Text(
+                                  "1 Person",
+                                  style: TextStyle(color: secondarycolor3),
+                                ),
+                                itemBuilder: (context) => [
+                                      PopupMenuItem(
+                                        child: Text("1 Person"),
+                                        value: 1,
+                                      ),
+                                      PopupMenuItem(
+                                        child: Text("2 People"),
+                                        value: 2,
+                                      ),
+                                      PopupMenuItem(
+                                        child: Text("3 People"),
+                                        value: 3,
+                                      ),
+                                      PopupMenuItem(
+                                        child: Text("4 People"),
+                                        value: 4,
+                                      )
+                                    ]),
                           ])),
                     ),
                   ],
