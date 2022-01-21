@@ -1,7 +1,7 @@
 import 'dart:async';
-import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:gari/screens/selectcar.dart';
 import 'package:gari/screens/style.dart';
 import 'package:gari/screens/mapstyle.dart';
 import 'package:geolocator/geolocator.dart';
@@ -75,12 +75,18 @@ class _HomeState extends State<Home> {
             initialCameraPosition: _kGooglePlex,
             myLocationButtonEnabled: true,
             zoomGesturesEnabled: true,
-            zoomControlsEnabled: true,
+            zoomControlsEnabled: false,
           ),
           Positioned(
               child: ListTile(
-            leading: Icon(Icons.menu),
-            title: Text("Book Your Ride"),
+            leading: Icon(
+              Icons.menu,
+              color: secondarycolor3,
+            ),
+            title: Text(
+              "Book Your Ride",
+              style: TextStyle(color: secondarycolor5),
+            ),
           )),
           Positioned(
             right: 0,
@@ -210,9 +216,15 @@ class _HomeState extends State<Home> {
                             MediaQuery.of(context).size.width * 0.06),
                         primary: primarycolor,
                       ),
-                      onPressed: () {},
-                      child: Text("Continue",
-                          style: TextStyle(color: secondarycolor3))))
+                      onPressed: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) => Selectcar()),
+                        );
+                      },
+                      child: Text("CONTINUE",
+                          style: TextStyle(
+                              letterSpacing: 6, color: secondarycolor3))))
             ]),
           ),
         ],
