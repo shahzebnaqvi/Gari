@@ -69,13 +69,14 @@ class _HomeState extends State<Home> {
 
   void locatePositionfinal() async {
     setState(() {
-     Marker(
-          markerId: const MarkerId('destination'),
-          infoWindow: const InfoWindow(title: 'Destination'),
-          icon: BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueBlue),
-          position: LatLng(24.9393199, 67.1220796),
-        );
-  })}
+      Marker(
+        markerId: const MarkerId('destination'),
+        infoWindow: const InfoWindow(title: 'Destination'),
+        icon: BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueBlue),
+        position: LatLng(24.9393199, 67.1220796),
+      );
+    });
+  }
 
   static final CameraPosition _kGooglePlex =
       CameraPosition(target: LatLng(24.9393199, 67.1220796), zoom: 12);
