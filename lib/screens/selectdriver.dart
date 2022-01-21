@@ -79,22 +79,82 @@ class _SelectdriverState extends State<Selectdriver> {
             zoomControlsEnabled: false,
           ),
           Positioned(
+              child: ListTile(
+            leading: InkWell(
+              onTap: () => Navigator.pop(context),
+              child: Icon(
+                Icons.arrow_back,
+                color: secondarycolor3,
+              ),
+            ),
+          )),
+          Positioned(
               bottom: 0,
               child: Container(
                 color: secondarycolor1,
                 width: MediaQuery.of(context).size.width,
                 child: Column(
                   children: [
-                    Row(
-                      children: [],
-                    ),
-                    Row(
-                      children: [
-                        ElevatedButton.icon(
+                    ListTile(
+                      leading: Image(
+                        image: AssetImage(
+                          "assets/images/default.jpeg",
+                        ),
+                      ),
+                      title: Text("George Smith",
+                          style:
+                              TextStyle(color: secondarycolor5, fontSize: 16)),
+                      subtitle: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            "Hyundai WaganR",
+                            style:
+                                TextStyle(color: secondarycolor5, fontSize: 9),
+                          ),
+                          Text(
+                            "data",
+                            style:
+                                TextStyle(color: secondarycolor5, fontSize: 11),
+                          )
+                        ],
+                      ),
+                      trailing: Column(
+                        children: [
+                          ElevatedButton.icon(
+                            icon: const Text(
+                              'UPADATE',
+                              style: TextStyle(fontSize: 9),
+                            ),
+                            label: Icon(
+                              Icons.translate,
+                              size: 7,
+                            ),
                             onPressed: () {},
-                            icon: Icon(Icons.call),
-                            label: Text("dd"))
-                      ],
+                          ),
+                          Text("d")
+                        ],
+                      ),
+                    ),
+                    Container(
+                      padding: EdgeInsets.all(20),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          ElevatedButton.icon(
+                              onPressed: () {},
+                              icon: Icon(Icons.call),
+                              label: Text("dd")),
+                          ElevatedButton.icon(
+                              onPressed: () {},
+                              icon: Icon(Icons.call),
+                              label: Text("dd")),
+                          ElevatedButton.icon(
+                              onPressed: () {},
+                              icon: Icon(Icons.call),
+                              label: Text("dd"))
+                        ],
+                      ),
                     )
                   ],
                 ),
